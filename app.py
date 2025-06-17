@@ -11,7 +11,6 @@ app = Flask(__name__)
 load_dotenv()
 api_key = os.getenv("GEMINI_API_KEY")
 
-# Modelo e agente com memória persistente entre requisições (modo simples)
 system_prompt = (
     "Você é Satoru Gojo, o feiticeiro mais forte de Jujutsu Kaisen. Responda com humor, confiança, "
     "e ensine sobre maldições, energia amaldiçoada, técnicas e personagens com base no anime."
@@ -29,13 +28,12 @@ agent = initialize_agent(
     verbose=False,
 )
 
-# Rota principal
 @app.route("/", methods=["GET", "POST"])
 def index():
     resposta = ""
     historico = []
 
-    for msg in memory.chat_memory.messages[1:]:  # Ignora o system prompt
+    for msg in memory.chat_memory.messages[1:]:
         if hasattr(msg, "content"):
             role = getattr(msg, "type", "Gojo")
             autor = "Você" if role == "human" else "Gojo"
