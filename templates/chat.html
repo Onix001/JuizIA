@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gojo Chat - Jujutsu Kaisen</title>
+  <style>
+    body {
+      background-color: #1e1e1e;
+      color: #f0f0f0;
+      font-family: "Segoe UI", sans-serif;
+      padding: 2em;
+    }
+    h1 {
+      color: #66ccff;
+      text-align: center;
+    }
+    .chat-box {
+      background: #2c2c2c;
+      border-radius: 10px;
+      padding: 1em;
+      margin-bottom: 1em;
+      max-height: 60vh;
+      overflow-y: auto;
+    }
+    .msg {
+      margin: 0.5em 0;
+    }
+    .msg.you {
+      color: #ccffcc;
+    }
+    .msg.gojo {
+      color: #ffccff;
+    }
+    form {
+      display: flex;
+      gap: 1em;
+    }
+    input[type="text"] {
+      flex-grow: 1;
+      padding: 0.6em;
+      border-radius: 5px;
+      border: none;
+    }
+    input[type="submit"] {
+      padding: 0.6em 1em;
+      background-color: #66ccff;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌀 Chat com Gojo Satoru</h1>
+  <div class="chat-box">
+    {% for autor, msg in historico %}
+      <div class="msg {% if autor == 'Você' %}you{% else %}gojo{% endif %}">
+        <strong>{{ autor }}:</strong> {{ msg }}
+      </div>
+    {% endfor %}
+  </div>
+  <form method="POST">
+    <input type="text" name="pergunta" placeholder="Faça sua pergunta..." required>
+    <input type="submit" value="Enviar">
+  </form>
+</body>
+</html>
